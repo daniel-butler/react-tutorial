@@ -111,16 +111,28 @@ class Game extends React.Component {
         let status;
         if (winner) {
             status = (
-                <div>
-                    Winner:
-                    {winner}
-                </div>);
+                <h3 className="subtitle">
+                    Winner: {winner}
+                </h3>);
         } else {
-            status = 'Next player: ' + (this.state.uIsNext ? 'Unicorn' : 'Dragon');
+            status = (
+                <div>
+                    Next player: {
+                    this.state.uIsNext ? (
+                        <img alt="X"
+                             className="square-icon"
+                             src={unicorn}
+                        />) : (
+                        <img alt="O"
+                             className="square-icon"
+                             src={dragon} />
+                        )}
+                </div>
+            );
         }
-
         return (
             <div className="game">
+                <div className="game-status">{status}</div>
                 <div className="game-board">
                     <Board
                         squares={current.squares}
@@ -128,7 +140,6 @@ class Game extends React.Component {
                     />
                 </div>
                 <div className="game-info">
-                    <div>{status}</div>
                     <ol>{moves}</ol>
                 </div>
             </div>
@@ -149,7 +160,9 @@ function calculateWinner(squares){
     ];
     for (let i = 0; i < lines.length; i++){
         const [a, b, c] = lines[i];
-        if (squares[a] && squares[b] && squares[c] && squares[a].props.alt === squares[b].props.alt && squares[a].props.alt === squares[c].props.alt){
+        if (squares[a] && squares[b] && squares[c]
+                && squares[a].props.alt === squares[b].props.alt
+            && squares[a].props.alt === squares[c].props.alt){
 
             return squares[a];
         }
@@ -157,7 +170,7 @@ function calculateWinner(squares){
     return null;
 }
 
-// ============================================
+// ======================================================================================
 
 ReactDOM.render(
     <Game />, document.getElementById('root')

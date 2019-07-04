@@ -50,6 +50,10 @@ ol, ul {
     margin-left: 20px;
 }
 
+.game-status {
+    padding-right: 20px;
+}
+
 .title {
     text-align: center;
 }
