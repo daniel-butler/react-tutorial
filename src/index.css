@@ -14,7 +14,7 @@ ol, ul {
 }
 
 .status {
-    margin-bottom: #fff;
+    margin-bottom: 10px;
 }
 
 .square {
@@ -50,3 +50,6 @@ ol, ul {
     margin-left: 20px;
 }
 
+.title {
+    text-align: center;
+}
