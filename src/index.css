@@ -53,3 +53,10 @@ ol, ul {
 .title {
     text-align: center;
 }
+
+.subtitle {
+    margin-bottom: 30px;
+    color: rebeccapurple;
+    font-weight: bolder;
+    text-align: center;
+}
