@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import unicorn from './unicorn.png';
+import dragon from './dragon.png';
+
 import './index.css';
 
 function Square(props) {
@@ -54,7 +57,7 @@ class Game extends React.Component {
                 squares: Array(9).fill(null),
             }],
             stepNumber: 0,
-            xIsNext: true,
+            uIsNext: true,
         };
     }
 
@@ -65,20 +68,28 @@ class Game extends React.Component {
         if (calculateWinner(squares) || squares[i]){
             return;
         }
-        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        squares[i] = this.state.uIsNext ? (
+            <img alt="X"
+                className="square-icon"
+                src={unicorn}
+            />) : (
+            <img alt="O"
+                className="square-icon"
+                src={dragon} />
+        );
         this.setState({
             history: history.concat([{
                 squares: squares,
             }]),
             stepNumber: history.length,
-            xIsNext: !this.state.xIsNext,
+            uIsNext: !this.state.uIsNext,
         });
     }
 
     jumpTo(step){
         this.setState({
             stepNumber: step,
-            xIsNext: (step % 2) === 0,
+            uIsNext: (step % 2) === 0,
         });
     }
 
@@ -99,9 +110,13 @@ class Game extends React.Component {
 
         let status;
         if (winner) {
-            status = 'Winner: ' + winner + '!';
+            status = (
+                <div>
+                    Winner:
+                    {winner}
+                </div>);
         } else {
-            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+            status = 'Next player: ' + (this.state.uIsNext ? 'Unicorn' : 'Dragon');
         }
 
         return (
@@ -134,7 +149,8 @@ function calculateWinner(squares){
     ];
     for (let i = 0; i < lines.length; i++){
         const [a, b, c] = lines[i];
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
+        if (squares[a] && squares[b] && squares[c] && squares[a].props.alt === squares[b].props.alt && squares[a].props.alt === squares[c].props.alt){
+
             return squares[a];
         }
     }

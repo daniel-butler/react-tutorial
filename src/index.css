@@ -60,3 +60,8 @@ ol, ul {
     font-weight: bolder;
     text-align: center;
 }
+
+.square-icon{
+    height: 30px;
+    width: 30px;
+}
